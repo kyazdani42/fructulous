@@ -1,0 +1,12 @@
+[package]
+name = "fructulous"
+version = "0.0.1"
+authors = ["kyazdani42 <yazdani.kiyan@protonmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+glutin = "0.24"
+gl = "*"
+
