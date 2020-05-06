@@ -1,4 +1,4 @@
-#![allow(non_snake_case, non_upper_case_globals)]
+#![allow(non_snake_case)]
 use glutin::dpi::PhysicalSize;
 use glutin::event::{Event, KeyboardInput, VirtualKeyCode, WindowEvent};
 use glutin::event_loop::ControlFlow;
@@ -18,7 +18,6 @@ mod renderer;
 use renderer::Renderer;
 
 mod generator;
-use generator::{Generator,ComputeType};
 
 pub const WIDTH: i32 = 1920;
 pub const HEIGHT: i32 = 1080;
@@ -49,9 +48,7 @@ fn main() {
     gl::load_with(|symbol| context.get_proc_address(symbol) as *const _);
     unsafe { gl::Viewport(0, 0, WIDTH, HEIGHT) }
 
-    let gpu_generator = Generator::new(ComputeType::Gpu);
-    let cpu_generator = Generator::new(ComputeType::Cpu);
-    let mut renderer = Renderer::new(gpu_generator, cpu_generator, context);
+    let mut renderer = Renderer::new(context);
     renderer.draw();
 
     el.run(move |event, _, control_flow| {

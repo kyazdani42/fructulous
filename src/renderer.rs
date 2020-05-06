@@ -1,4 +1,5 @@
-use super::{Ctx, Generator, ComputeType};
+use super::generator::{ComputeType, Generator};
+use super::Ctx;
 
 pub struct Renderer {
     pub gentype: ComputeType,
@@ -12,11 +13,11 @@ pub struct Renderer {
 }
 
 impl Renderer {
-    pub fn new(gpu_generator: Generator, cpu_generator: Generator, context: Ctx) -> Self {
+    pub fn new(context: Ctx) -> Self {
         Self {
             gentype: ComputeType::Gpu,
-            gpu_generator,
-            cpu_generator,
+            gpu_generator: Generator::new(ComputeType::Gpu),
+            cpu_generator: Generator::new(ComputeType::Cpu),
             context,
             precision: 50,
             zoom: 1.0,

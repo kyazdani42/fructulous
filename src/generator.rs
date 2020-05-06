@@ -1,15 +1,10 @@
+#![allow(non_upper_case_globals)]
 use std::ffi::c_void;
 use std::mem;
 
 use super::{Shader, HEIGHT, WIDTH};
 
 use gl::types::*;
-
-pub struct Generator {
-    pub VAO: u32,
-    pub num_vertices: i32,
-    pub shader: Shader,
-}
 
 static gpu_vtx_shad: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/res/gpu_vert.glsl");
 static gpu_frag_shad: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/res/gpu_frag.glsl");
@@ -20,6 +15,12 @@ static cpu_vtx_shad: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/res/cpu_vert.g
 pub enum ComputeType {
     Gpu,
     Cpu,
+}
+
+pub struct Generator {
+    pub VAO: u32,
+    pub num_vertices: i32,
+    pub shader: Shader,
 }
 
 impl Generator {
@@ -108,7 +109,14 @@ fn gen_cpu() -> Generator {
         gl::VertexAttribPointer(0, 2, gl::FLOAT, gl::FALSE, stride, std::ptr::null());
         gl::EnableVertexAttribArray(0);
 
-        gl::VertexAttribPointer(0, 3, gl::FLOAT, gl::FALSE, stride, (2 * float_size) as *const c_void);
+        gl::VertexAttribPointer(
+            0,
+            3,
+            gl::FLOAT,
+            gl::FALSE,
+            stride,
+            (2 * float_size) as *const c_void,
+        );
         gl::EnableVertexAttribArray(1);
 
         gl::BindBuffer(gl::ARRAY_BUFFER, 0);
