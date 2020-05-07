@@ -47,7 +47,7 @@ impl Shader {
                 );
                 println!(
                     "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n{}",
-                    str::from_utf8(&info_log).unwrap()
+                    str::from_utf8(&info_log).unwrap(),
                 );
             };
 

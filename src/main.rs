@@ -33,7 +33,7 @@ fn main() {
         .with_inner_size(PhysicalSize::new(WIDTH, HEIGHT));
 
     let context = ContextBuilder::new()
-        .with_gl(GlRequest::Specific(Api::OpenGl, (3, 3)))
+        .with_gl(GlRequest::Specific(Api::OpenGl, (4, 4)))
         .build_windowed(wb, &el);
 
     let context = match context {
@@ -117,10 +117,6 @@ fn handle_keycodes(input: KeyboardInput, renderer: &mut Renderer) -> ControlFlow
             }
             VirtualKeyCode::Up => {
                 renderer.move_up();
-                renderer.draw();
-            }
-            VirtualKeyCode::T => {
-                renderer.switch_generator();
                 renderer.draw();
             }
             _ => control_flow = ControlFlow::Wait,
