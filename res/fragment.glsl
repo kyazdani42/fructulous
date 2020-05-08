@@ -10,6 +10,7 @@ uniform float yOffset;
 uniform float algType;
 uniform int colorType;
 uniform float time;
+uniform int n;
 
 void main()
 {
@@ -40,13 +41,15 @@ void main()
             zRe = zRe * zRe - zIm * zIm + cRe;
             zIm = mult * tmp * zIm + cIm;
         }
-    // Julia 2 sides
+    // duplicate mandelbrot (julia sets, by n)
     } else if (algType == 3.0) {
-        float n = 3.0;
+        double cabs = 0.0;
+        float atanvalue = 0.0;
         while (++i < maxIter && zRe*zRe+zIm*zIm < B*B) {
-            tmp = double(pow(float(zRe*zRe+zIm*zIm), n / 2.0)) * cos(n * atan(float(zIm), float(zRe))) + cRe;
-            zIm = double(pow(float(zRe*zRe+zIm*zIm), n / 2.0)) * sin(n * atan(float(zIm), float(zRe))) + cIm;
-            zRe = tmp;
+            cabs = pow(float(zRe*zRe+zIm*zIm), n/2);
+            atanvalue = n * atan(float(zIm), float(zRe));
+            zRe = cabs * cos(atanvalue) + cRe;
+            zIm = cabs * sin(atanvalue) + cIm;
         }
     }
 

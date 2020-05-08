@@ -93,6 +93,8 @@ fn handle_keycodes(input: KeyboardInput, renderer: &mut Renderer) -> ControlFlow
             VirtualKeyCode::Right => renderer.move_right(),
             VirtualKeyCode::Down => renderer.move_down(),
             VirtualKeyCode::Up => renderer.move_up(),
+            VirtualKeyCode::A => renderer.change_n(-1),
+            VirtualKeyCode::D => renderer.change_n(1),
             VirtualKeyCode::C => renderer.next_color(),
             VirtualKeyCode::T => renderer.switch_automation(),
             VirtualKeyCode::X => renderer.next_fractal_type(),

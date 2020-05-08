@@ -26,6 +26,7 @@ pub struct Renderer {
     pub start_time: std::time::Instant,
     pub automate: bool,
     pub fractalType: FractalType,
+    pub n: i32
 }
 
 impl Renderer {
@@ -40,7 +41,8 @@ impl Renderer {
             colorType: 1,
             start_time: std::time::Instant::now(),
             automate: true,
-            fractalType: FractalType::Mandelbrot(2.0),
+            fractalType: FractalType::Mandelbrot(1.0),
+            n: 3
         }
     }
 
@@ -54,6 +56,7 @@ impl Renderer {
             generator.shader.setFloat("xOffset", self.xOffset);
             generator.shader.setFloat("yOffset", self.yOffset);
             generator.shader.setInt("colorType", self.colorType);
+            generator.shader.setInt("n", self.n);
             generator.shader.setFloat("algType", self.fractalType.as_f32());
             if self.automate {
                 generator.shader.setFloat("time", time);
@@ -77,6 +80,13 @@ impl Renderer {
                 2 => FractalType::Julia,
                 _ => FractalType::Mandelbrot(1.0),
             },
+        }
+    }
+
+    pub fn change_n(&mut self, inc: i32) {
+        self.n += inc;
+        if self.n <= 2 {
+            self.n = 3;
         }
     }
 
